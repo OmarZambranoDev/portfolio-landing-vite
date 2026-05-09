@@ -1,5 +1,5 @@
 # Portfolio Landing Page
-Vite host application for my micro-frontend portfolio. This app serves as the container that will eventually integrate multiple remote micro-frontends via Module Federation.
+Vite host application for my micro-frontend portfolio. This app serves as the container that integrates multiple remote micro-frontends via Module Federation.
 
 ## Tech Stack
 - Vite 5.0.0
