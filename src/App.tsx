@@ -9,13 +9,11 @@ import {
 } from '@OmarZambranoDev/portfolio-ui';
 import { Music } from 'lucide-react';
 import MusicPage from './pages/MusicPage';
-import ProjectPage from './pages/ProjectPage';
 
 function HomePage() {
   const projects = [
     {
       title: 'Music Player',
-      slug: 'music',
       description:
         'A Spotify-inspired music player with playlist management, mock audio playback, and persistent state. Features 200 tracks, mobile-responsive design, and full CI/CD pipeline.',
       tech: [
@@ -245,7 +243,7 @@ function HomePage() {
                       GitHub
                     </Button>
                   </a>
-                  <a href={`/projects/${project.slug}`} className="flex-1">
+                  <a href="/music" className="flex-1">
                     <Button
                       variant="primary"
                       size="sm"
@@ -305,7 +303,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/music" element={<MusicPage />} />
-        <Route path="/projects/:slug" element={<ProjectPage />} />
       </Routes>
     </BrowserRouter>
   );

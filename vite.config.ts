@@ -7,10 +7,17 @@ export default defineConfig({
     react(),
     federation({
       name: 'host',
-      remotes: {},
+      remotes: {
+        music: {
+          name: 'music',
+          entry: 'http://localhost:3002/remoteEntry.js',
+          type: 'module',
+        },
+      },
       shared: {
         react: { singleton: true, requiredVersion: '18.2.0' },
         'react-dom': { singleton: true, requiredVersion: '18.2.0' },
+        'react/jsx-runtime': { singleton: true },
         '@OmarZambranoDev/portfolio-ui': { singleton: true },
       },
     }),
@@ -25,5 +32,8 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+  },
+  optimizeDeps: {
+    exclude: ['@OmarZambranoDev/portfolio-ui'],
   },
 });

@@ -64,3 +64,4 @@ next-env.d.ts
 # Public copied files
 public/index.css
 app/index.css
+@mf-types
