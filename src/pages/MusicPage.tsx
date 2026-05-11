@@ -1,18 +1,26 @@
-import { lazy, Suspense, useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { Suspense, useEffect } from 'react';
 
 const MUSIC_URL = import.meta.env.VITE_MUSIC_REMOTE_URL || 'http://localhost:3002';
 
-const MusicApp = lazy(() => import('music/MusicApp'));
+const MusicApp = React.lazy(() => {
+  return import(/* @vite-ignore */ `${MUSIC_URL}/remoteEntry.js`)
+    .then((container: any) => container.get('./MusicApp'))
+    .then((factory: any) => {
+      const Module = factory();
+      return { default: Module.default || Module };
+    });
+});
 
 export default function MusicPage() {
   useEffect(() => {
-    // Always load the compiled CSS from the music app's preview/build server.
-    // In production/dev, the URL points to the same asset.
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = `${MUSIC_URL}/assets/style.css`;
     document.head.appendChild(link);
-    return () => { document.head.removeChild(link); };
+    return () => {
+      document.head.removeChild(link);
+    };
   }, []);
 
   return (
