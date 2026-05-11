@@ -3,16 +3,25 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With, Content-Type" }
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type"
+        }
       ]
-    },
+    }
+  ],
+  "rewrites": [
     {
-      "source": "/remoteEntry.js",
-      "headers": [
-        { "key": "Content-Type", "value": "application/javascript" }
-      ]
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
