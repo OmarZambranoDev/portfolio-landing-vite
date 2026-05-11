@@ -24,14 +24,16 @@ export default function MusicPage() {
   }, []);
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center h-screen">
-          <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
-        </div>
-      }
-    >
-      <MusicApp />
-    </Suspense>
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-full">
+            <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
+          </div>
+        }
+      >
+        <MusicApp />
+      </Suspense>
+    </div>
   );
 }
