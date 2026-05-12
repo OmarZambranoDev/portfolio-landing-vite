@@ -18,29 +18,20 @@ export default function MusicPage() {
     link.rel = 'stylesheet';
     link.href = `${MUSIC_URL}/assets/style.css`;
     document.head.appendChild(link);
-
-    const timer = setTimeout(() => {
-      window.scrollTo(0, 0);
-      window.dispatchEvent(new Event('resize'));
-    }, 800);
-
     return () => {
       document.head.removeChild(link);
-      clearTimeout(timer);
     };
   }, []);
 
   return (
-    <div id="music-root" className="h-dvh">
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-full">
-            <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
-          </div>
-        }
-      >
-        <MusicApp />
-      </Suspense>
-    </div>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center h-screen">
+          <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <MusicApp />
+    </Suspense>
   );
 }
