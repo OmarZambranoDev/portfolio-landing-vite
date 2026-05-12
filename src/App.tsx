@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   Button,
@@ -13,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const navigate = useNavigate();
+  const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
+
   const projects = [
     {
       title: 'Music Player',
@@ -34,12 +37,19 @@ function HomePage() {
     },
   ];
 
-  const handleOpenApp = (e: React.MouseEvent) => {
+  const handleOpenApp = (e: React.MouseEvent, appName: string, path: string) => {
     e.preventDefault();
-    window.scrollTo(0, 0);
-    setTimeout(() => {
-      navigate('/music');
-    }, 500);
+
+    const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      setNavigatingTo(appName);
+      setTimeout(() => {
+        navigate(path);
+      }, 500);
+    } else {
+      navigate(path);
+    }
   };
 
 
@@ -254,7 +264,11 @@ function HomePage() {
                       GitHub
                     </Button>
                   </a>
-                  <a href="/music" onClick={handleOpenApp} className="flex-1">
+                  <a
+                    href="/music"
+                    onClick={(e) => handleOpenApp(e, 'Music Player', '/music')}
+                    className="flex-1"
+                  >
                     <Button
                       variant="primary"
                       size="sm"
@@ -304,6 +318,16 @@ function HomePage() {
           </p>
         </div>
       </footer>
+
+      {navigatingTo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-earth-stone/20 via-white to-earth-sand/20">
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-earth-moss">Navigating to {navigatingTo}...</p>
+          </div>
+        </div>
+      )}
+
     </main>
   );
 }
