@@ -18,22 +18,20 @@ export default function MusicPage() {
     link.rel = 'stylesheet';
     link.href = `${MUSIC_URL}/assets/style.css`;
     document.head.appendChild(link);
+
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      window.dispatchEvent(new Event('resize'));
+    }, 800);
+
     return () => {
       document.head.removeChild(link);
+      clearTimeout(timer);
     };
   }, []);
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        overflow: 'hidden',
-      }}
-    >
+    <div id="music-root" className="h-dvh">
       <Suspense
         fallback={
           <div className="flex items-center justify-center h-full">
