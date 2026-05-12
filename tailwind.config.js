@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      height: {
+        dvh: '100dvh',
+      },
       colors: {
         primary: '#344b33',
         'primary-hover': '#4a5d3e',
