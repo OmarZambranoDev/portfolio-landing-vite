@@ -25,14 +25,14 @@ export default function MusicPage() {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setReady(true), 400);
+    const timer = setTimeout(() => setReady(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
   if (!ready) {
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
+      <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin bg-blue-500" />
       <span>not ready</span>
     </div>
   );
