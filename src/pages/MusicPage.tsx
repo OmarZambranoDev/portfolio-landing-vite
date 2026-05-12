@@ -24,13 +24,15 @@ export default function MusicPage() {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log('Viewport height:', window.innerHeight);
-      console.log('Body height:', document.body.offsetHeight);
-      console.log('Root height:', document.getElementById('root')?.offsetHeight);
-      console.log('Scroll Y:', window.scrollY);
-      document.body.style.backgroundColor = 'rgba(255,0,0,0.1)';
-    }, 1500);
+    window.scrollTo(0, 0);
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.height = `${window.innerHeight}px`;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.height = '';
+      document.body.style.overflow = '';
+    };
   }, []);
 
   return (
