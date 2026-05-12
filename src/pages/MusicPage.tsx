@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 const MUSIC_URL = import.meta.env.VITE_MUSIC_REMOTE_URL || 'http://localhost:3002';
 
@@ -13,37 +14,44 @@ const MusicApp = React.lazy(() => {
 });
 
 export default function MusicPage() {
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = `${MUSIC_URL}/assets/style.css`;
     document.head.appendChild(link);
+
+    const div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.inset = '0';
+    document.body.appendChild(div);
+    setContainer(div);
+
     return () => {
       document.head.removeChild(link);
+      document.body.removeChild(div);
     };
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.height = `${window.innerHeight}px`;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.documentElement.style.overflow = '';
-      document.body.style.height = '';
-      document.body.style.overflow = '';
-    };
-  }, []);
+  if (!container) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
-  return (
+  return createPortal(
     <Suspense
       fallback={
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center h-full">
           <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
         </div>
       }
     >
       <MusicApp />
-    </Suspense>
+    </Suspense>,
+    container
   );
 }
