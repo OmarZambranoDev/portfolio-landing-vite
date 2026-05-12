@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 
 const MUSIC_URL = import.meta.env.VITE_MUSIC_REMOTE_URL || 'http://localhost:3002';
 
@@ -13,13 +13,6 @@ const MusicApp = React.lazy(() => {
 });
 
 export default function MusicPage() {
-  const [showApp, setShowApp] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowApp(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -31,18 +24,17 @@ export default function MusicPage() {
   }, []);
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center h-screen">
-          <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
-        </div>
-      }
-    >
-      {showApp ? <MusicApp /> : (
-        <div className="flex items-center justify-center h-screen">
-          <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
-        </div>
-      )}
-    </Suspense>
+    <div className="h-dvh">
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-full">
+            <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin" />
+          </div>
+        }
+      >
+        <MusicApp />
+      </Suspense>
+    </div>
   );
 }
+
