@@ -9,8 +9,10 @@ import {
 } from '@OmarZambranoDev/portfolio-ui';
 import { Music } from 'lucide-react';
 import MusicPage from './pages/MusicPage';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
+  const navigate = useNavigate();
   const projects = [
     {
       title: 'Music Player',
@@ -31,6 +33,15 @@ function HomePage() {
       repoUrl: 'https://github.com/OmarZambranoDev/portfolio-music',
     },
   ];
+
+  const handleOpenApp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      navigate('/music');
+    }, 500);
+  };
+
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-earth-stone/20 via-white to-earth-sand/20">
@@ -243,7 +254,7 @@ function HomePage() {
                       GitHub
                     </Button>
                   </a>
-                  <a href="/music" className="flex-1">
+                  <a href="/music" onClick={handleOpenApp} className="flex-1">
                     <Button
                       variant="primary"
                       size="sm"
