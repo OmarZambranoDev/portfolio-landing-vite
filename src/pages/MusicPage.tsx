@@ -24,7 +24,16 @@ export default function MusicPage() {
   }, []);
 
   return (
-    <div id="music-root" className="h-dvh">
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflow: 'hidden',
+      }}
+    >
       <Suspense
         fallback={
           <div className="flex items-center justify-center h-full">
