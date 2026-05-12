@@ -24,7 +24,7 @@ export default function MusicPage() {
   }, []);
 
   return (
-    <div className="h-dvh">
+    <div className="fixed inset-0">
       <Suspense
         fallback={
           <div className="flex items-center justify-center h-full">
