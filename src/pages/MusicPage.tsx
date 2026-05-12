@@ -25,7 +25,7 @@ export default function MusicPage() {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setReady(true), 400);
+    const timer = setTimeout(() => setReady(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
