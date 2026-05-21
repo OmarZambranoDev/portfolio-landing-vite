@@ -1,26 +1,16 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  Chip,
-} from '@OmarZambranoDev/portfolio-ui';
-import { Music } from 'lucide-react';
+import { Chip } from '@OmarZambranoDev/portfolio-ui';
+import { Music, TrendingUp } from 'lucide-react';
+import ProjectCard from './components/ProjectCard';
 import MusicPage from './pages/MusicPage';
-import { useNavigate } from 'react-router-dom';
+import TradePage from './pages/TradePage';
 
 function HomePage() {
-  const navigate = useNavigate();
-  const [navigatingTo, setNavigatingTo] = useState<string | null>(null);
-
   const projects = [
     {
       title: 'Music Player',
       description:
-        'A Spotify-inspired music player with playlist management, mock audio playback, and persistent state. Features 200 tracks, mobile-responsive design, and full CI/CD pipeline.',
+        'A Spotify-inspired music player with playlist management, mock audio playback, and persistent state. Features 200 tracks and mobile-responsive design.',
       tech: [
         'React',
         'TypeScript',
@@ -34,24 +24,31 @@ function HomePage() {
       ],
       icon: Music,
       repoUrl: 'https://github.com/OmarZambranoDev/portfolio-music',
+      path: '/music',
+    },
+    {
+      title: 'Trade App',
+      description:
+        'A real-time stock trading simulator with interactive charts, portfolio tracking, and trade execution. Features live market data simulation, watchlist management, and mobile-responsive design.',
+      tech: [
+        'React',
+        'TypeScript',
+        'Vite',
+        'Module Federation',
+        'Tailwind CSS',
+        'Zustand',
+        'Lightweight Charts',
+        'REST API Integration',
+        'Mock WebSocket',
+        'Playwright',
+        'Vitest',
+        'GitHub Actions',
+      ],
+      icon: TrendingUp,
+      repoUrl: 'https://github.com/OmarZambranoDev/portfolio-trade-app',
+      path: '/trade',
     },
   ];
-
-  const handleOpenApp = (e: React.MouseEvent, appName: string, path: string) => {
-    e.preventDefault();
-
-    const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      setNavigatingTo(appName);
-      setTimeout(() => {
-        navigate(path);
-      }, 500);
-    } else {
-      navigate(path);
-    }
-  };
-
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-earth-stone/20 via-white to-earth-sand/20">
@@ -225,62 +222,7 @@ function HomePage() {
         <h2 className="text-2xl font-bold text-earth-forest mb-6">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <Card
-              key={project.title}
-              variant="elevated"
-              className="bg-white border border-earth-stone/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-earth-sage/50"
-            >
-              <div className="h-40 bg-gradient-to-br from-earth-forest to-earth-sage flex items-center justify-center">
-                <project.icon size={48} className="text-earth-stone" aria-hidden="true" />
-              </div>
-              <CardContent>
-                <h3 className="text-xl font-bold text-earth-forest mb-1">{project.title}</h3>
-                <CardDescription className="text-earth-moss">{project.description}</CardDescription>
-                <div className="flex flex-wrap gap-1 mt-3">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs px-2 py-0.5 bg-earth-stone/20 text-earth-forest rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter>
-                <div className="flex gap-2 w-full">
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1"
-                  >
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full border-earth-sage text-earth-forest hover:bg-earth-stone/20"
-                      aria-label={`View ${project.title} source code on GitHub`}
-                    >
-                      GitHub
-                    </Button>
-                  </a>
-                  <a
-                    href="/music"
-                    onClick={(e) => handleOpenApp(e, 'Music Player', '/music')}
-                    className="flex-1"
-                  >
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      className="w-full bg-earth-forest hover:bg-earth-moss border-earth-forest text-white"
-                      aria-label={`Open ${project.title} demo`}
-                    >
-                      Open App
-                    </Button>
-                  </a>
-                </div>
-              </CardFooter>
-            </Card>
+            <ProjectCard key={project.title} {...project} />
           ))}
         </div>
       </section>
@@ -302,7 +244,7 @@ function HomePage() {
                 UI Library
               </a>
               <a
-                href="https://github.com/OmarZambranoDev/portfolio-landing-vite"
+                href="https://github.com/OmarZambranoDev/portfolio-landing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-earth-forest hover:text-earth-sage transition-colors underline underline-offset-4"
@@ -318,16 +260,6 @@ function HomePage() {
           </p>
         </div>
       </footer>
-
-      {navigatingTo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-earth-stone/20 via-white to-earth-sand/20">
-          <div className="text-center">
-            <div className="w-12 h-12 border-4 border-earth-forest border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-earth-moss">Navigating to {navigatingTo}...</p>
-          </div>
-        </div>
-      )}
-
     </main>
   );
 }
@@ -338,6 +270,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/music" element={<MusicPage />} />
+        <Route path="/trade" element={<TradePage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -7,13 +7,6 @@ export default defineConfig({
     react(),
     federation({
       name: 'host',
-      // remotes: {
-      //   music: {
-      //     name: 'music',
-      //     entry: 'http://localhost:3002/remoteEntry.js',
-      //     type: 'module',
-      //   },
-      // },
       shared: {
         react: { singleton: true, requiredVersion: '18.2.0' },
         'react-dom': { singleton: true, requiredVersion: '18.2.0' },
