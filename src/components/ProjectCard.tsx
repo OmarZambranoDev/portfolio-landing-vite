@@ -50,7 +50,7 @@ export default function ProjectCard({
         <div className="h-40 bg-gradient-to-br from-earth-forest to-earth-sage flex items-center justify-center">
           <Icon size={48} className="text-earth-stone" aria-hidden="true" />
         </div>
-        <CardContent className='flex-1'>
+        <CardContent className="flex-1">
           <h3 className="text-xl font-bold text-earth-forest mb-1">{title}</h3>
           <CardDescription className="text-earth-moss">{description}</CardDescription>
           <div className="flex flex-wrap gap-1 mt-3">

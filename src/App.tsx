@@ -38,7 +38,6 @@ function HomePage() {
         'Tailwind CSS',
         'Zustand',
         'Lightweight Charts',
-        'REST API Integration',
         'Mock WebSocket',
         'Playwright',
         'Vitest',
