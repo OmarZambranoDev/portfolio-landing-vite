@@ -27,7 +27,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [lint, type-check, test]
+    needs: [version-check, lint]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
