@@ -1,25 +1,45 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pkgPath = resolve(__dirname, '..', 'package.json');
+const lockPath = resolve(__dirname, '..', 'package-lock.json');
 const versionsPath = resolve(__dirname, '..', 'versions.json');
 
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-const canonical = JSON.parse(readFileSync(versionsPath, 'utf-8'));
+const lock = JSON.parse(readFileSync(lockPath, 'utf-8'));
 
+// Generate canonical versions from lock file
+const sharedDeps = ['react', 'react-dom', 'zustand', '@OmarZambranoDev/portfolio-ui'];
+
+const canonical = {};
+for (const dep of sharedDeps) {
+  const key = `node_modules/${dep}`;
+  const installed = lock.packages?.[key];
+  if (installed?.version) {
+    canonical[dep] = installed.version;
+  }
+}
+if (canonical.react) {
+  canonical['react/jsx-runtime'] = canonical.react;
+}
+
+// Update versions.json
+writeFileSync(versionsPath, JSON.stringify(canonical, null, 2) + '\n');
+console.log('✅ Generated versions.json from package-lock.json');
+console.log(JSON.stringify(canonical, null, 2));
+
+// Check against package.json
 const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
 const mismatches = [];
 
 for (const [name, version] of Object.entries(canonical)) {
   if (name === 'react/jsx-runtime') continue;
-  const installed = allDeps[name];
-  if (!installed) {
-    continue; // Skip if not installed—host doesn't need all remote deps
-  }
-  if (version === 'latest') continue;
-  const cleanInstalled = installed.replace(/^[\^~]/, '');
+  const installedVersion = allDeps[name];
+  if (!installedVersion) continue;
+  if (installedVersion === 'latest') continue; // Skip if package.json uses latest
+  const cleanInstalled = installedVersion.replace(/^[\^~]/, '');
   if (cleanInstalled !== version) {
     mismatches.push(`${name}: expected ${version}, got ${cleanInstalled}`);
   }
