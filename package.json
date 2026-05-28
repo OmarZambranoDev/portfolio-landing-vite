@@ -6,7 +6,7 @@
   "scripts": {
     "generate-versions": "node scripts/check-versions.js",
     "check-versions": "node scripts/check-versions.js",
-    "predev": "npm run check-versions",
+    "postinstall": "npm run generate-versions",
     "prebuild": "npm run check-versions",
     "dev": "vite",
     "build": "tsc && vite build",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@module-federation/vite": "latest",
-    "@OmarZambranoDev/portfolio-ui": "latest",
+    "@OmarZambranoDev/portfolio-ui": "0.0.35",
     "lucide-react": "^1.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
