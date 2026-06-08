@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Chip } from '@OmarZambranoDev/portfolio-ui';
-import { Music, TrendingUp } from 'lucide-react';
+import { Music, TrendingUp, Users } from 'lucide-react';
 import ProjectCard from './components/ProjectCard';
 import MusicPage from './pages/MusicPage';
 import TradePage from './pages/TradePage';
+import SocialPage from './pages/SocialPage';
 
 function HomePage() {
   const projects = [
@@ -38,14 +39,32 @@ function HomePage() {
         'Tailwind CSS',
         'Zustand',
         'Lightweight Charts',
-        'Mock WebSocket',
         'Playwright',
         'Vitest',
         'GitHub Actions',
       ],
       icon: TrendingUp,
-      repoUrl: 'https://github.com/OmarZambranoDev/portfolio-trade-app',
+      repoUrl: 'https://github.com/OmarZambranoDev/portfolio-trade',
       path: '/trade',
+    },
+    {
+      title: 'Social App',
+      description:
+        'A Twitter-style social feed with following system, post creation, likes, comments, notifications, and user search. Features infinite scroll, optimistic updates, and real-time interaction simulation across desktop and mobile layouts.',
+      tech: [
+        'React',
+        'TypeScript',
+        'Vite',
+        'Module Federation',
+        'Tailwind CSS',
+        'Zustand',
+        'Vitest',
+        'Playwright',
+        'GitHub Actions',
+      ],
+      icon: Users,
+      repoUrl: 'https://github.com/OmarZambranoDev/portfolio-social',
+      path: '/social',
     },
   ];
 
@@ -270,6 +289,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/music" element={<MusicPage />} />
         <Route path="/trade" element={<TradePage />} />
+        <Route path="/social" element={<SocialPage />} />
       </Routes>
     </BrowserRouter>
   );
