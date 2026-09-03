@@ -91,7 +91,7 @@ function HomePage() {
     {
       title: 'Travel App',
       description:
-        'An AI-powered travel planning app with SSR destination pages, streaming itinerary generation, live weather, and interactive maps. Features curated destinations, saved trips with local persistence, and responsive desktop and mobile layouts.',
+        'An AI-powered travel planning app with SSR destination pages and streaming itinerary generation via the Claude API. Integrates live weather data through server-side API routes with cached, time-based revalidation, and interactive maps via client-side OpenStreetMap tiles. Destination images are fetched and cached at build time. Features curated destinations, saved trips with local persistence, and responsive desktop and mobile layouts.',
       tech: [
         'Next.js',
         'React',
@@ -117,11 +117,11 @@ function HomePage() {
       <section className="border-b border-earth-stone/30">
         <div className="container mx-auto px-6 py-8 max-w-7xl">
           <h1 className="text-4xl md:text-5xl font-bold text-earth-forest mb-4">Omar Zambrano</h1>
-          <p className="text-xl text-earth-sage font-medium mb-4">Senior React Engineer</p>
+          <p className="text-xl text-earth-sage font-medium mb-4">Frontend Engineer</p>
           <p className="text-lg text-earth-moss">
             Frontend engineer with 7 years of experience building large-scale applications at
-            Walmart. Exploring micro-frontend architecture, Next.js, and AI-integrated development
-            through a series of production-quality portfolio projects.
+            Walmart. Extended that expertise through a self-directed portfolio platform spanning
+            micro-frontend architecture, Next.js, and AI-assisted development workflows.
           </p>
         </div>
       </section>
@@ -137,9 +137,12 @@ function HomePage() {
         <br />
         <p className="text-earth-moss leading-relaxed">
           Each project is built end-to-end, from architecture decisions through testing and
-          deployment. I use AI coding assistants as development accelerators, handling
-          implementation details while I retain full ownership of architecture, code quality, and
-          engineering decisions. Each project card notes which AI tool was used.
+          deployment. Development was accelerated using a multi-agent workflow: one orchestrator
+          agent maintained a consistent stack and resolved shared issues across projects, a
+          dedicated agent handled the UI component library, and per-app agents implemented
+          feature-specific work from detailed prompts. I retained full ownership of architecture,
+          code quality, and engineering decisions throughout. Each project card notes which AI tool
+          was used.
         </p>
       </section>
 
@@ -159,9 +162,6 @@ function HomePage() {
                 TypeScript
               </Chip>
               <Chip variant="primary" size="md">
-                React Native
-              </Chip>
-              <Chip variant="primary" size="md">
                 Vite
               </Chip>
               <Chip variant="primary" size="md">
@@ -175,16 +175,10 @@ function HomePage() {
             </h3>
             <div className="flex flex-wrap gap-2">
               <Chip variant="primary" size="md">
-                Jest
-              </Chip>
-              <Chip variant="primary" size="md">
                 Vitest
               </Chip>
               <Chip variant="primary" size="md">
                 Playwright
-              </Chip>
-              <Chip variant="primary" size="md">
-                React Testing Library
               </Chip>
             </div>
           </div>
@@ -197,9 +191,6 @@ function HomePage() {
                 Tailwind CSS
               </Chip>
               <Chip variant="primary" size="md">
-                Figma
-              </Chip>
-              <Chip variant="primary" size="md">
                 Storybook
               </Chip>
             </div>
@@ -209,12 +200,6 @@ function HomePage() {
               State Management
             </h3>
             <div className="flex flex-wrap gap-2">
-              <Chip variant="secondary" size="md">
-                Redux
-              </Chip>
-              <Chip variant="secondary" size="md">
-                Context API
-              </Chip>
               <Chip variant="secondary" size="md">
                 Zustand
               </Chip>
@@ -226,16 +211,13 @@ function HomePage() {
             </h3>
             <div className="flex flex-wrap gap-2">
               <Chip variant="secondary" size="md">
-                GraphQL
+                Server-Side Rendering
               </Chip>
               <Chip variant="secondary" size="md">
-                REST APIs
+                API Route Handlers
               </Chip>
               <Chip variant="secondary" size="md">
-                Swagger
-              </Chip>
-              <Chip variant="secondary" size="md">
-                Postman
+                Response Caching
               </Chip>
             </div>
           </div>
@@ -246,6 +228,9 @@ function HomePage() {
             <div className="flex flex-wrap gap-2">
               <Chip variant="secondary" size="md">
                 GitHub Actions
+              </Chip>
+              <Chip variant="secondary" size="md">
+                GitHub Packages
               </Chip>
             </div>
           </div>
@@ -260,9 +245,6 @@ function HomePage() {
               <Chip variant="accent" size="md">
                 Module Federation
               </Chip>
-              <Chip variant="accent" size="md">
-                Webpack
-              </Chip>
             </div>
           </div>
           <div>
@@ -271,10 +253,7 @@ function HomePage() {
             </h3>
             <div className="flex flex-wrap gap-2">
               <Chip variant="accent" size="md">
-                AI Development Agents
-              </Chip>
-              <Chip variant="accent" size="md">
-                Multi-Agent Orchestration
+                AI-Assisted Development
               </Chip>
               <Chip variant="accent" size="md">
                 Vercel AI SDK
@@ -299,7 +278,7 @@ function HomePage() {
         <div className="container mx-auto px-6 py-8 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-sm">
             <p className="text-earth-sage">
-              Built with Vite, React, Module Federation, and AI development agents
+              Built with React, Vite, Next.js, and AI-assisted development
             </p>
             <span className="hidden md:block text-earth-stone">•</span>
             <div className="flex gap-4">
